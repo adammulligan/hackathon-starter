@@ -1,40 +1,17 @@
-![Alt](https://lh4.googleusercontent.com/-PVw-ZUM9vV8/UuWeH51os0I/AAAAAAAAD6M/0Ikg7viJftQ/w1286-h566-no/hackathon-starter-logo.jpg)
-Hackathon Starter [![Dependency Status](https://david-dm.org/sahat/hackathon-starter.png?theme=shields.io)](https://david-dm.org/sahat/hackathon-starter)
-=================
+# Hackathon Starter Fork
+
 A boilerplate for **Node.js** web applications.
 
-**Live Demo**: http://hackathonstarter.herokuapp.com :octocat:
-
-If you have attended any hackathons in the past then you know how much time it takes to
-get a project started. Decide on an idea, pick a programming language, pick a web framework,
-pick a CSS framework. A while later, you will have an initial project up on GitHub, and only then can other team members
-start contributing. Or what about doing something as simple as OAuth 2.0 Authentication? You can spend hours
-on it if you are not familiar with how OAuth 2.0 works. *(As a side-note, over a year ago
-I had no idea WTF REST or OAuth were, or how to do a simple "Sign in with Facebook".
-It was a frustrating experience to say the least.)*
-
-When I started this project, my primary focus was on **simplicity** and **ease of use**.
-I also tried to make it as **generic** and **reusable** as possible to cover most use cases of hackathon web apps,
-without being too specific. In the worst case you can use this as a guide for your projects, if for example you are only
-interested in **Sign in with Google** authentication and nothing else.
-
-Chances are, you might not need all 4 types of OAuth 1.0a/OAuth2 authentication methods, or all 9 API examples.
-Sadly, there is no step-by-step wizard to configure the boilerplate code just for your use case. So, use what you need, simply delete what you don't need.
-
-<h4 align="center">Flatly Bootstrap Theme</h3>
-
-![Alt](https://lh6.googleusercontent.com/-NikjFtdyOq8/UsCv7URplAI/AAAAAAAADrE/a417u0cZU7Y/w1278-h958-no/Screenshot+2013-12-29+18.27.10.png)
-
-<h4 align="center">Default Theme</h3>
-
-![Alt](https://lh5.googleusercontent.com/-KmlaMLKGCqg/UuWt4MrXzeI/AAAAAAAAD6o/KUucObo33zU/w1170-h860-no/Screenshot+2014-01-26+19.52.03.png)
+Forked from the excellent [Hackathon
+Start](https://github.com/sahat/hackathon-starter). I've removed the
+OAuth and API related bits, as I'll likely need them less often when
+starting my projects.
 
 Table of Contents
 -----------------
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
-- [Obtaining API Keys](#obtaining-api-keys)
 - [Project Structure](#project-structure)
 - [Useful Tools](#useful-tools)
 - [Recommended Design](#recommended-design)
@@ -51,8 +28,6 @@ Table of Contents
 Features
 --------
 - **Local Authentication** using Email and Password
-- **OAuth 1.0a Authentication** via Twitter
-- **OAuth 2.0 Authentication** via Facebook, Google or GitHub
 - Awesome flash notifications with animations by [animate.css](http://daneden.github.io/animate.css/)
 - MVC Project Structure
 - Node.js clusters support
@@ -64,9 +39,7 @@ Features
  - Gravatar
  - Profile Details
  - Change Password
- - Link multiple OAuth strategies to one account
  - Delete Account
-- **API Examples**: Facebook, Foursquare, Last.fm, Tumblr, Twitter, PayPal, and more.
 
 Prerequisites
 -------------
@@ -104,126 +77,6 @@ node app.js
 >It will monitor for any changes in your node.js
 >application and automatically restart the server. Once installed, instead of `node app.js` use `nodemon app.js`.
 >It is a big time saver in the long run.
-
-Next up, if you want to use any of the APIs or OAuth authentication methods, you will need to obtain
-appropriate credentials: Client ID, Client Secret, API Key, or Username & Password. You will
-need to go through each provider to generate new credentials.
-
-Obtaining API Keys
-------------------
-
-:pushpin: You could support all 5 authentication methods by setting up OAuth keys, but you don't have to. If you would only like to have **Facebook sign-in** and **Local sign-in** with email and password, in **secrets.js** set `googleAuth: false`, `twitterOauth: false`, `githubAuth: false`. By doing so, *Google, Twitter and Github* buttons will not show up on the *Login* page. If you set `localAuth: false`, users will not be able to login/create an account with email and password or change password in the *Account Management* page.
-
-<img src="http://images.google.com/intl/en_ALL/images/srpr/logo6w.png" width="200">
-- Visit [Google Cloud Console](https://cloud.google.com/console/project)
-- Click **CREATE PROJECT** button
-- Enter *Project Name*, then click **CREATE**
-- Then select *APIs & auth* from the sidebar and click on *Credentials* tab
-- Click **CREATE NEW CLIENT ID** button
- - **Application Type**: Web Application
- - **Authorized Javascript origins**: http://localhost:3000
- - **Authorized redirect URI**: http://localhost:3000/auth/google/callback
-- Copy and paste *Client ID* and *Client secret* keys into `config/secrets.js`
-
-:exclamation: **Note**: When you ready to deploy to production don't forget to add your new url to *Authorized Javascript origins* and *Authorized redirect URI*, e.g. `http://my-awesome-app.herokuapp.com` and `http://my-awesome-app.herokuapp.com/auth/google/callback` respectively. The same goes for other providers.
-
-<hr>
-
-<img src="http://www.doit.ba/img/facebook.jpg" width="200">
-- Visit [Facebook Developers](https://developers.facebook.com/)
-- Click **Apps > Create a New App** in the navigation bar
-- Enter *Display Name*, then choose a category, then click **Create app**
-- Copy and paste *App ID* and *App Secret* keys into `config/secrets.js`
- - *App ID* is **clientID**, *App Secret* is **clientSecret**
-- Click on *Settings* on the sidebar, then click **+ Add Platform**
-- Select **Website**
-- Enter `http://localhost:3000` for *Site URL*
-
-:exclamation: **Note**: After a successful sign in with Facebook, a user will be redirected back to home page with appended hash `#_=_` in the URL. It is *not* a bug. See this [Stack Overflow](https://stackoverflow.com/questions/7131909/facebook-callback-appends-to-return-url) discussion for ways to handle it.
-
-<hr>
-
-<img src="https://github.global.ssl.fastly.net/images/modules/logos_page/GitHub-Logo.png" width="200">
-- Go to [Account Settings](https://github.com/settings/profile)
-- Select **Applications** from the sidebar
-- Then inside **Developer applications** click on **Register new application**
-- Enter *Application Name* and *Homepage URL*.
-- For *Authorization Callback URL*: http://localhost:3000/auth/github/callback
-- Click **Register application**
-- Now copy and paste *Client ID* and *Client Secret* keys into `config/secrets.js`
-
-<hr>
-
-<img src="https://g.twimg.com/Twitter_logo_blue.png" width="100">
-- Sign in at [https://dev.twitter.com](https://dev.twitter.com/)
-- From the profile picture dropdown menu select **My Applications**
-- Click **Create a new application**
-- Enter your application name, website and description
-- For **Callback URL**: http://127.0.0.1:3000/auth/twitter/callback
-- Go to **Settings** tab
-- Under *Application Type* select **Read and Write** access
-- Check the box **Allow this application to be used to Sign in with Twitter**
-- Click **Update this Twitter's applications settings**
-- Copy and paste *Consumer Key* and *Consumer Secret* keys into `config/secrets.js`
-
-<hr>
-
-<img src="https://s3.amazonaws.com/venmo/venmo_logo_blue.png" width="200">
-- Visit the **Account** section of your Venmo profile after logging in
-- Click on the **Developers** tab
-- Then click on the [new](https://venmo.com/account/app/new) link next to **Your Applications (0)**
-- Fill in the required fields: *App Name* and *What Will The App Be Used For?*
-- For **Web Redirect URL** enter: http://localhost:3000/auth/venmo/callback
-- Hit **Create** button
-- Back on the **Developers** tab click on **view** link next to **Your Applications (1) new**
-- Copy and paste **ID** and **Secret** keys into `config/secrets.js`
-
-<hr>
-
-<img src="https://www.paypalobjects.com/webstatic/developer/logo_paypal-developer_beta.png" width="200">
-- Visit [PayPal Developer](https://developer.paypal.com/)
-- Log in to your PayPal account
-- Click **Applications > Create App** in the navigation bar
-- Enter *Application Name*, then click **Create app**
-- Copy and paste *Client ID* and *Secret* keys into `config/secrets.js`
-- *App ID* is **client_id**, *App Secret* is **client_secret**
-- Change **host** to api.paypal.com if you want to test against production and use the live credentials
-
-<hr>
-
-<img src="https://www.dropboxatwork.com/wp-content/uploads/2013/02/foursquare-logo.png" width="200">
-- Go to [foursquare for Developers](https://developer.foursquare.com/)
-- Click on **My Apps** in the top menu
-- Click the **Create A New App** button
-- Enter *App Name*, *Welcome page url*,
-- For **Redirect URI**: http://localhost:3000/auth/foursquare/callback
-- Click **Save Changes**
-- Copy and paste *Client ID* and *Client Secret* keys into `config/secrets.js`
-
-<hr>
-
-<img src="http://www.athgo.org/ablog/wp-content/uploads/2013/02/tumblr_logo.png" width="200">
-- Go to http://www.tumblr.com/oauth/apps
-- Once signed in, click **+Register application**
-- Fill in all the details
-- For **Default Callback URL**: http://localhost:3000/auth/tumblr/callback
-- Click **✔Register**
-- Copy and paste *OAuth consumer key* and *OAuth consumer secret* keys into `config/secrets.js`
-
-<hr>
-
-<img src="http://www.outofoursystem.com/wp-content/uploads/2012/06/steam-logo-white.jpg" width="200">
-- Go to http://steamcommunity.com/dev/apikey
-- Sign in with your existing Steam account
-- Enter your *Domain Name*, then and click **Register**
-- Copy and paste *Key* into `config/secrets.js`
-
-<hr>
-
-<img src="https://raw.github.com/mailgun/media/master/Mailgun_Primary.png" width="200">
-- Go to http://www.mailgun.com
-- Sign up and add your *Domain Name*
-- From the domain overview, copy and paste the default SMTP *Login* and *Password* into `config/secrets.js`
 
 Project Structure
 -----------------
@@ -411,12 +264,6 @@ which in itself is not a trivial task. And then there is a whole different proce
 for authentication with single page applications. If you insist on using
 a client-side framework, it's best if you use a boilerplate of choice for your particular
 client-side framework and just grab the pieces you need from the Hackathon Starter.
-
-### Why is there no Mozilla Persona as a sign-in option?
-If you would like to use **Persona** authentication strategy, use the [pull request #64](https://github.com/sahat/hackathon-starter/pull/64) as
-a reference guide. I have explained my reasons why it could not be merged into the *Hackathon Starter* in
-[issue #63](https://github.com/sahat/hackathon-starter/issues/63#issuecomment-34898290).
-
 
 
 ### How do I switch SendGrid for another email delivery service?
